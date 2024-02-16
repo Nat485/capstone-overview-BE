@@ -7,11 +7,6 @@ require("dotenv").config()
 const PORT = process.env.PORT
 const gfRecipesController = require("./controllers/gfRecipesController.js")
 
-app.use(express.json())
-app.use(cors())
-app.use("gfRecipes", gfRecipesController)
-
-
 app.listen(PORT),() => {
     console.log(`Listening on $ {PORT}`)
 

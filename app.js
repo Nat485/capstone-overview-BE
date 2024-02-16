@@ -2,9 +2,16 @@ const express = require("express")
 const app = express()
 const cors = require("cors")
 //middleware any route that will run the functionality
-app.use(express.json())
+//app.use(express.json())
     //every single route will run 
-app.use(cors()) //running a method to pass a request
+//app.use(cors()) //running a method to pass a request
+
+const gfRecipesController = require("./controllers/gfRecipesController.js")
+
+app.use(express.json())
+app.use(cors())
+app.use("/gfRecipes", gfRecipesController)
+
 
 app.get("/", (req, res) => {
     res.status(200).send("Test backend server")
