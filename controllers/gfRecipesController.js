@@ -2,6 +2,7 @@
 
 const express = require("express")
 const gfRecipes = express.Router()
+const {nameCheck} = require("../middleware/nameValidation.js")
 
 //this is the start of the endpoint
 gfRecipes.get("/", (req, res) => {
@@ -21,13 +22,17 @@ gfRecipes.get("/:recipeID",(req, res) => {
         res.status(404).json({
             error : "id must be numeric value"
         })
-    }
-    
-    
-    //console.log(recipeID, "param")
+    }})
 
-    res.status(200).json({message: recipeID})
+    gfRecipes.post("/",nameCheck, (req, res)=> {
+    const body = req.body
+        res.status(200).json({message: body})
 })
+
+
+
+    
+
 
 
 //the req is an object; it is dissecting all of the different urls
