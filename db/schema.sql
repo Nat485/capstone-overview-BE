@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS gfRecipes_dev;
+DROP DATABASE IF EXISTS gfrecipes_dev;
 
-\c gfRecipes_dev;
+\c gfrecipes_dev;
 
 CREATE TABLE recipes (
     id SERIAL PRIMARY KEY,
