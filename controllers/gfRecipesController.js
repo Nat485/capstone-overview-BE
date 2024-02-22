@@ -10,8 +10,8 @@ const {getAllRecipes} = require("../query/recipe.js")
 
 
 //this is the start of the endpoint
-gfRecipes.get("/", (req, res) => {
-    res.status(200).json({message:"GF recipes homepage"})
+gfRecipes.get("/", async (req, res) => {
+    res.status(200).json(allRecipes)
 
 })
 //adding the id for the items that will exist in the website
