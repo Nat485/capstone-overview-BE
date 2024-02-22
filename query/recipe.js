@@ -33,7 +33,7 @@ recipe_type TEXT
 
 try {
     const updateGfRecipes = await db.one('UPDATE recipes SET title=$1, creation_date=$2, vegan=$3, recipe_type=$4 WHERE id=$5 RETURNING *', [
-        body.title,
+        body.recipe_name,
         body.creation_date,
         body.vegan,
         body.recipe_type,
