@@ -16,10 +16,16 @@ gfRecipes.get("/", async (req, res) => {
 })
 //adding the id for the items that will exist in the website
 
-gfRecipes.get("/:recipeID",(req, res) => {
-    const recipeID = req.params.recipeID
+gfRecipes.get("/", async (req, res) => {
+    const allRecipes = await getAllRecipes()
+    res.status(200).json(allRecipes)
+})
+
+
+gfRecipes.get("/:recipeID", async (req, res) => {
+    const recipeID = req.params.recipeID 
+
     
-    console.log(Number(recipeID))
     if(Number(recipeID)){
         res.status(200).json({message: recipeID})
     }
