@@ -1,16 +1,15 @@
 {
   "name": "capstone-review",
   "version": "1.0.0",
-  "description": "",
+  "description": "Server Readme",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
     "dbinit": "psql -U postgres -f db/schema.sql",
-    "dbseed": "psql -U postgres -f db/seed.sql"
-
+    "dbseed": "psql -U postgres -f db/seed.sql",
+    "start": "node server.js"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
