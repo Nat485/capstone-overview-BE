@@ -29,6 +29,27 @@ gfRecipes.get("/:recipeID",(req, res) => {
         res.status(200).json({message: body})
 })
 
+gfRecipes.put("/:recipeID", nameCheck, (req, res) => {   //add colon and the ID is a place holder 
+    const recipeID = req.params.recipeID
+
+    const body = req.body
+    
+    res.status(200).json({body, recipeID})
+})
+
+gfRecipes.delete("/:recipeID",(req, res)=> {
+    const recipeID = req.params.recipeID
+
+    if(Number(recipeID)){
+        res.status(200).json({message: `delete ${recipeID}`})
+    }
+    else{
+        res.status(404).json({
+            error : "Recipe ID must be  a numeric number"
+        })
+    }})
+
+
 
 
     

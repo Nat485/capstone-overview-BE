@@ -13,15 +13,15 @@ if(typeof name === "string") {
 
     const firstNameRecipe = firstName.charAt(0).toUpperCase()
 
-    const secondNameRecipe = secondName.charAt(1).toUpperCase()
+    const secondNameRecipe = secondName.charAt(0).toUpperCase()
 
-    const thirdNameRecipe = thirdName.charAt(2).toUpperCase()
+    const thirdNameRecipe = thirdName.charAt(0).toUpperCase()
 
     const restOfFirstName = firstName.slice(1).toLowerCase()
 
-    const restOfSecondName = secondName.slice(2).toLowerCase()
+    const restOfSecondName = secondName.slice(1).toLowerCase()
 
-    const restOfThirdName = thirdName.slice(3).toLowerCase()
+    const restOfThirdName = thirdName.slice(1).toLowerCase()
 
     const changedFirstName = `${firstNameRecipe}${restOfFirstName}`
 
@@ -29,9 +29,9 @@ if(typeof name === "string") {
 
     const changedThirdName = `${thirdNameRecipe}${restOfThirdName}`
 
-    req.body.name = changedFirstName, changedSecondName, changedThirdName //updated value in the body 
+    req.body.name = `${changedFirstName} ${changedSecondName} ${changedThirdName}` //updated value in the body 
 
-    next()       //it needs direction for the middleware to move on to the next task
+    next();       //it needs direction for the middleware to move on to the next task
 
 }else {
     res.status(404).json({
