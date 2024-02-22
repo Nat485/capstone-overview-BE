@@ -1,8 +1,13 @@
 //an endpoint router to the api
 
 const express = require("express")
+
 const gfRecipes = express.Router()
+
 const {nameCheck} = require("../middleware/nameValidation.js")
+
+const {getAllRecipes} = require("../query/recipe.js")
+
 
 //this is the start of the endpoint
 gfRecipes.get("/", (req, res) => {

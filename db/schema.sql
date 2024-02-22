@@ -7,7 +7,7 @@ CREATE TABLE recipes (
     title TEXT NOT NULL,
     creation_date INT,
     vegan BOOLEAN
-    recipe_type TEXT
+    recipe_type TEXT 
     
 );
 
