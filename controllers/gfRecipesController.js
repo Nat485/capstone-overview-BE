@@ -6,7 +6,7 @@ const gfRecipes = express.Router()
 
 const {nameCheck} = require("../middleware/nameValidation.js")
 
-const {getAllRecipes} = require("../query/recipe.js")
+const {getAllRecipes, deleteRecipe} = require("../query/recipe.js")
 
 
 //this is the start of the endpoint
@@ -48,11 +48,23 @@ gfRecipes.put("/:recipeID", nameCheck, (req, res) => {   //add colon and the ID 
     res.status(200).json({body, recipeID})
 })
 
-gfRecipes.delete("/:recipeID",(req, res)=> {
+gfRecipes.delete("/:recipeID", async(req, res)=> {
     const recipeID = req.params.recipeID
 
     if(Number(recipeID)){
-        res.status(200).json({message: `delete ${recipeID}`})
+        const deletedRecipe = await deleteRecipe(recipeID)
+//only this if will run if the first if is truthy
+        
+        if(deletedRecipe.id){
+            res.status(200).json(deletedRecipe)
+        }
+        else{
+            res.status(500).json(deletedRecipe)
+        }
+        
+        
+//this will run next if the first if is falsey
+   
     }
     else{
         res.status(404).json({

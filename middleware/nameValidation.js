@@ -1,8 +1,11 @@
 //this is to prevent the break in the database.
 //split in the space empty string instead of character
+
+
 function nameCheck (req, res, next) {
     const name = req.body.name
-if(typeof name === "string") {
+
+    if(typeof name === "string") {
     const nameArr = name.split(" ") 
 
     const firstName = nameArr[0]

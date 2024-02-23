@@ -47,13 +47,25 @@ try {
 return error 
 
 {
+
+const deleteRecipe = async (recipeValue) => {
+try {
     
-}}}
+const deletedRecipe = db.one('DELETE FROM gfRecipes WHERE id=$1 RETURNING *', arg2)
+
+    return deletedRecipe
+} catch (error) {
+    return error
+}
+}
+
+}}};
 
 
 module.exports = {
     getAllRecipes,
     getOneRecipe,
-    updateGfRecipes
+    updateGfRecipes,
+    deleteRecipe
 
 };
