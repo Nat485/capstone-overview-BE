@@ -5,9 +5,9 @@ const app = require("./app.js") //importing into this file, we can app the liste
 require("dotenv").config()
 
 const PORT = process.env.PORT
-const gfRecipesController = require("./controllers/gfRecipesController.js")
 
-app.listen(PORT),() => {
-    console.log(`Listening on $ {PORT}`)
 
-}; //this is the local host to check on the backend
+app.listen(PORT,() => {
+    console.log(`Listening on ${PORT}`)
+
+}); //this is the local host to check on the backend

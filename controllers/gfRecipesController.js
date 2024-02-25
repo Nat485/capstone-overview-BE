@@ -9,14 +9,15 @@ const {nameCheck} = require("../middleware/nameValidation.js")
 const {getAllRecipes, deleteRecipe} = require("../query/recipe.js")
 
 
-//this is the start of the endpoint
+//this is the start of the endpoint; await this response is called.
 gfRecipes.get("/", async (req, res) => {
+    const allRecipes = await getAllRecipes() 
     res.status(200).json(allRecipes)
 
 })
 //adding the id for the items that will exist in the website
 
-gfRecipes.get("/", async (req, res) => {
+/*  gfRecipes.get("/", async (req, res) => {
     const allRecipes = await getAllRecipes()
     res.status(200).json(allRecipes)
 })
@@ -72,7 +73,7 @@ gfRecipes.delete("/:recipeID", async(req, res)=> {
         })
     }})
 
-
+*/
 
 
     
