@@ -6,7 +6,8 @@ const gfRecipes = express.Router()
 
 const {nameCheck} = require("../middleware/nameValidation.js")
 
-const {getAllRecipes, deleteRecipe} = require("../query/recipe.js")
+const {getAllRecipes, deleteRecipe, getOneRecipe} = require("../query/recipe.js")
+
 
 
 //this is the start of the endpoint; await this response is called.
@@ -17,18 +18,14 @@ gfRecipes.get("/", async (req, res) => {
 })
 //adding the id for the items that will exist in the website
 
-/*  gfRecipes.get("/", async (req, res) => {
-    const allRecipes = await getAllRecipes()
-    res.status(200).json(allRecipes)
-})
-
-
-gfRecipes.get("/:recipeID", async (req, res) => {
+ gfRecipes.get("/:recipeID", async (req, res) => {
     const recipeID = req.params.recipeID 
-
+    
     
     if(Number(recipeID)){
-        res.status(200).json({message: recipeID})
+        const oneRecipe = await getOneRecipe(recipeID)//whatever is stored is being returned as one object
+        res.status(200).json(oneRecipe)
+        
     }
     else{
         res.status(404).json({
@@ -73,7 +70,7 @@ gfRecipes.delete("/:recipeID", async(req, res)=> {
         })
     }})
 
-*/
+
 
 
     
