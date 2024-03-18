@@ -25,20 +25,20 @@ const getOneRecipe = async (recipeValue) => {
 
 
 
-const updateGfRecipes = async (recipeValue,recipeObj)=> {
+const updateGfRecipes = async (recipeValue, recipeObj)=> {
 /*id SERIAL PRIMARY KEY,
-title TEXT NOT NULL,
+recipe_name TEXT NOT NULL,
 creation_date INT,
 vegan BOOLEAN
 recipe_type TEXT 
 */
 
 try {
-    const updateGfRecipes = await db.one('UPDATE recipes SET title=$1, creation_date=$2, vegan=$3, recipe_type=$4 WHERE id=$5 RETURNING *', [
-        body.recipe_name,
-        body.creation_date,
-        body.vegan,
-        body.recipe_type,
+    const updateGfRecipes = await db.one('UPDATE recipes SET recipe_name=$1, creation_date=$2, vegan=$3, recipe_type=$4 WHERE id=$5 RETURNING *', [
+        recipeObj.recipe_name,
+        recipeObj.creation_date,
+        recipeObj.vegan,
+        recipeObj.recipe_type,
         recipeValue
     ])
 
@@ -53,7 +53,7 @@ return error
 const deleteRecipe = async (recipeValue) => {
 try {
     
-const deletedRecipe = db.one('DELETE FROM gfRecipes WHERE id=$1 RETURNING *', arg2)
+const deletedRecipe = db.one('DELETE FROM recipes WHERE id=$1 RETURNING *', recipeValue)
 
     return deletedRecipe
 } catch (error) {
@@ -64,7 +64,7 @@ const deletedRecipe = db.one('DELETE FROM gfRecipes WHERE id=$1 RETURNING *', ar
 
 const addRecipe = async (recipeValue) => {
     try {
-        const newRecipe = await db.one('INSERT INTO gfRecipes (recipe_name, creation_date, vegan, recipe_type) VALUES($1,$2,$3,$4)RETURNING *',[
+        const newRecipe = await db.one('INSERT INTO recipes (recipe_name, creation_date, vegan, recipe_type) VALUES($1,$2,$3,$4)RETURNING *',[
         recipeValue.recipe_name,
         recipeValue.creation_date,
         recipeValue.vegan,

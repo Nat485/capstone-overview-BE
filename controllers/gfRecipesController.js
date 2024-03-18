@@ -6,7 +6,7 @@ const gfRecipes = express.Router()
 
 const {nameCheck} = require("../middleware/nameValidation.js")
 
-const {getAllRecipes, deleteRecipe, getOneRecipe} = require("../query/recipe.js")
+const {getAllRecipes, deleteRecipe, getOneRecipe, addRecipe, updateGfRecipes} = require("../query/recipe.js")
 
 
 
@@ -33,38 +33,40 @@ gfRecipes.get("/", async (req, res) => {
         })
     }})
 
-    gfRecipes.post("/",nameCheck, (req, res)=> {
-    const body = req.body
-        res.status(200).json({message: body})
+    gfRecipes.post("/", async (req, res)=> {
+    const body = req.body 
+    const newRecipe = await addRecipe(body)
+
+        res.status(200).json({message: newRecipe}) //maybe add a try catch error code for this. 
 })
 
-gfRecipes.put("/:recipeID", nameCheck, (req, res) => {   //add colon and the ID is a place holder 
-    const recipeID = req.params.recipeID
+gfRecipes.put("/:recipeID", async (req, res) => {   //add colon and the ID is a place holder 
+    const { recipeID } = req.params;
 
-    const body = req.body
+    const updatedRecipe = await(updateGfRecipes (recipeID,req.body))
     
-    res.status(200).json({body, recipeID})
+    res.status(200).json({ updatedRecipe});
 })
 
-gfRecipes.delete("/:recipeID", async(req, res)=> {
-    const recipeID = req.params.recipeID
+gfRecipes.delete("/:recipeID", async(req, res) => {
+    const recipeID = req.params.recipeID;
 
     if(Number(recipeID)){
-        const deletedRecipe = await deleteRecipe(recipeID)
+        const deletedRecipe = await deleteRecipe(recipeID);
 //only this if will run if the first if is truthy
         
         if(deletedRecipe.id){
-            res.status(200).json(deletedRecipe)
+            res.status(200).json(deletedRecipe);
         }
         else{
-            res.status(500).json(deletedRecipe)
+            res.status(500).json(deletedRecipe);
         }
         
         
 //this will run next if the first if is falsey
    
-    }
-    else{
+    
+    }else{
         res.status(404).json({
             error : "Recipe ID must be  a numeric number"
         })

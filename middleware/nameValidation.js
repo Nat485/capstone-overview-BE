@@ -2,48 +2,25 @@
 //split in the space empty string instead of character
 
 
-function nameCheck (req, res, next) {
-    const name = req.body.name
+function nameCheck(req, res, next) {
+    const name = req.body.recipe_name;
 
-    if(typeof name === "string") {
-    const nameArr = name.split(" ") 
+    if (typeof name !== "string") {
+        return res.status(404).json({
+            Error: "Name must be a string"
+        });
+    }
 
-    const firstName = nameArr[0]
+    const capitalizeFirstLetter = (word) => {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    };
 
-    const secondName = nameArr[1]
+    const formattedName = name.split(" ").map(capitalizeFirstLetter).join(" ");
 
-    const thirdName = nameArr[2]
-
-    const firstNameRecipe = firstName.charAt(0).toUpperCase()
-
-    const secondNameRecipe = secondName.charAt(0).toUpperCase()
-
-    const thirdNameRecipe = thirdName.charAt(0).toUpperCase()
-
-    const restOfFirstName = firstName.slice(1).toLowerCase()
-
-    const restOfSecondName = secondName.slice(1).toLowerCase()
-
-    const restOfThirdName = thirdName.slice(1).toLowerCase()
-
-    const changedFirstName = `${firstNameRecipe}${restOfFirstName}`
-
-    const changedSecondName = `${secondNameRecipe}${restOfSecondName}`
-
-    const changedThirdName = `${thirdNameRecipe}${restOfThirdName}`
-
-    req.body.name = `${changedFirstName} ${changedSecondName} ${changedThirdName}` //updated value in the body 
-
-    next();       //it needs direction for the middleware to move on to the next task
-
-}else {
-    res.status(404).json({
-        Error: "name must be a string"
-    })
-}
+    req.body.name = formattedName;
+    next();
 }
 
 module.exports = {
     nameCheck
-}
-
+};
